@@ -38,13 +38,13 @@ def get_room():
 @app.post("/api/room")
 def create_room():
     data = request.get_json()
-    val = data["name"]
+    value = data["name"]
     with connection:
         with connection.cursor() as cursor:
             cursor.execute(CREATE_ROOM_TABLE)
-            cursor.execute(INSERT_ROOM_RETURN_ID, (val,))
+            cursor.execute(INSERT_ROOM_RETURN_ID, (value,))
             room_id = cursor.fetchone()[0]
-    return {"id": room_id, "message": f"Room {val} created."}, 201
+    return {"id": room_id, "message": f"Room {value} created."}, 201
 
 
 @app.route("/api/room/<int:id>", methods=["DELETE"])
@@ -52,7 +52,7 @@ def delete_room(id):
     with connection:
         with connection.cursor() as cursor:
             cursor.execute(DELETE_ROOM, (id,))
-    return {"Deleted room with id ": id}, 201
+    return {"Deleted room with id ": id}
 
 
 @app.route("/api/room/<string:val>/<int:id>", methods=["PUT"])
@@ -60,4 +60,4 @@ def update_room(val, id):
     with connection:
         with connection.cursor() as cursor:
             cursor.execute(UPDATE_ROOM, (val, id))
-    return {"Updated room with id ": id}, 201
+    return {"Updated room with id ": id}
