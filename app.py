@@ -11,8 +11,8 @@ UPDATE_ROOM = "UPDATE rooms set name = %s where id = %s"
 load_dotenv()
 
 app = Flask(__name__)
-url = os.getenv("DATABASE_URl")
-connection = psycopg2.connect(url)
+#url = os.getenv("DATABASE_URl")
+connection = psycopg2.connect("postgres://ypgbfuiq:w1fmqswNx8lijJWr02kbQKr1PuMRm__S@satao.db.elephantsql.com/ypgbfuiq")
 
 
 @app.route("/")
